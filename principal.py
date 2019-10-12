@@ -1,6 +1,6 @@
 from registro import *
 import random
-import io
+
 from time import *
 import os
 from archivos import *
@@ -163,6 +163,22 @@ def busqueda_bin_fav(FD, codigo):
     return posicion
 
 
+def validar_menor_que(min, param):
+    n = float(input(param))
+
+    while n < min:
+        print('ERROR! El valor debe ser mayor que ', min)
+        n = float(input(param))
+    return n
+
+def validar_mayor_que(max, param):
+    n = float(input(param))
+
+    while n > max:
+        print('ERROR! El valor debe ser menor que ', max)
+        n = float(input(param))
+    return n
+
 def test():
     vec = []
     vec_fav = []
@@ -208,10 +224,10 @@ def test():
                 print('\t Presione 3 si no desea modificar ningun otro valor.')
                 op2 = int(input('Ingrese una opcion:'))
                 if op2 == 1:
-                    min = float(input('Ingrese el nuevo valor minimo: $'))
+                    min = validar_menor_que(min, 'Ingrese el nuevo valor minimo: $')
                     input('Su valor se ha modificado correctamente. Presione <ENTER> para continuar')
                 elif op2 == 2:
-                    max = float(input('Ingrese el nuevo valor maximo: $'))
+                    max = validar_mayor_que(max, 'Ingrese el nuevo valor maximo: $')
                     input('Su valor se ha modificado correctamente. Presione <ENTER> para continuar')
             vRangoPrecios = rangoDePrecios(vec, min, max)
             print('Los productos encontrados en ese rango son: ')
