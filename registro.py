@@ -2,6 +2,8 @@ provincias = ['Jujuy', 'Catamarca', 'Corrientes', 'Formosa', 'Salta', 'Misiones'
             'Santiago del Estero','La Rioja','Santa Fe', 'Entre rios', 'Buenos Aires', 'Mendoza', 'San Juan',
               'San Luis','Cordoba', 'La Pampa','Rio Negro','Chubut', 'Neuquen', 'Santa Cruz', 'Tierra del Fuego']
 
+envios=['Retiro en local','Envio a Domicilio']
+
 class busqueda():
     def __init__(self, codigo, precio, ubicacion ,estado, cantidad, puntos):
         self.codigo = codigo
@@ -21,6 +23,11 @@ class compra():
         self.monto_total=monto_total
         self.fecha=fecha
 
+def writeCompra(compra):
+    print('{:<20}'.format(compra.codigo), '{:<10}'.format(compra.cantidad),
+          '{:<20}'.format(compra.precio), '{:<20}'.format(envios_f(compra.envio)),
+          '{:<20}'.format(compra.monto_total), '{:<10}'.format(compra.fecha))
+
 def write(busqueda):
     print('-'*60)
     print('Codigo de la publicacion:  ', busqueda.codigo)
@@ -33,6 +40,9 @@ def write(busqueda):
 
 def provincias_f(num):
     return provincias[num]
+
+def envios_f(num):
+    return envios[num]
 
 def write2(busqueda):
     print('{:<20}'.format(busqueda.codigo),'{:<10}'.format(busqueda.precio),'{:<20}'.format(provincias_f(busqueda.ubicacion)),'{:<10}'.format(busqueda.estado),
