@@ -8,7 +8,7 @@ from archivos import *
 def validateRange(mensaje, ci, cs):
     valor = int(input(mensaje))
     while valor < ci or valor > cs:
-        print('ERROR!')
+        print('ERROR! el valor asignado debe estar entre', ci, 'y', cs)
         valor = int(input(mensaje))
     return valor
 
@@ -163,22 +163,6 @@ def busqueda_bin_fav(FD, codigo):
     return posicion
 
 
-def validar_menor_que(min, param):
-    n = float(input(param))
-
-    while n < min:
-        print('ERROR! El valor debe ser mayor que ', min)
-        n = float(input(param))
-    return n
-
-def validar_mayor_que(max, param):
-    n = float(input(param))
-
-    while n > max:
-        print('ERROR! El valor debe ser menor que ', max)
-        n = float(input(param))
-    return n
-
 def test():
     vec = []
     vec_fav = []
@@ -224,10 +208,10 @@ def test():
                 print('\t Presione 3 si no desea modificar ningun otro valor.')
                 op2 = int(input('Ingrese una opcion:'))
                 if op2 == 1:
-                    min = validar_menor_que(min, 'Ingrese el nuevo valor minimo: $')
+                    min = validateRange('Ingrese el nuevo valor minimo: $', min, max)
                     input('Su valor se ha modificado correctamente. Presione <ENTER> para continuar')
                 elif op2 == 2:
-                    max = validar_mayor_que(max, 'Ingrese el nuevo valor maximo: $')
+                    max = validateRange('Ingrese el nuevo valor maximo: $', min, max)
                     input('Su valor se ha modificado correctamente. Presione <ENTER> para continuar')
             vRangoPrecios = rangoDePrecios(vec, min, max)
             print('Los productos encontrados en ese rango son: ')
@@ -258,7 +242,7 @@ def test():
                 if exists(fd_fav):
                     vec_fav_act = deserializar(fd_fav)
                     for i in range(len(vec_fav)):
-                        codigo=vec_fav[i].codigo
+                        codigo = vec_fav[i].codigo
                         r=busqueda_bin_fav(fd_fav,codigo)
                         if r==-1:
                             add_in_order_bin(vec_fav_act,vec_fav[i])
